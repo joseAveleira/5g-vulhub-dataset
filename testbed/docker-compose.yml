@@ -1,0 +1,189 @@
+services:
+  # === VULNERABILIDADES WEB RCE ===
+  spring:
+    image: vulhub/spring-cloud-gateway:3.1.0
+    container_name: ctf-spring-22947
+    ports:
+      - "8180:8080"
+    networks:
+      - vuln-net
+    restart: unless-stopped
+
+  struts2:
+    image: vulhub/struts2:2.3.30
+    container_name: ctf-struts-045
+    ports:
+      - "8081:8080"
+    networks:
+      - vuln-net
+    restart: unless-stopped
+
+  drupal-cve-2019-6339:
+    image: vulhub/drupal:8.5.0
+    container_name: ctf-drupal
+    ports:
+      - "8082:8080"
+    networks:
+      - vuln-net
+    restart: unless-stopped
+
+  php-cve-2019-11043: #pendiente de revisar
+    image: vulhub/php:7.2.10-fpm
+    container_name: ctf-php
+    ports:
+      - "8086:8080"
+    networks:
+      - vuln-net
+    restart: unless-stopped
+
+  tomcat-cve-2017-12615:
+    build:
+      context: ./vulhub/tomcat/cve-2017-12615
+      dockerfile: Dockerfile
+    container_name: ctf-tomcat
+    ports:
+      - "8087:8080"
+    networks:
+      - vuln-net
+    restart: unless-stopped
+
+  weblogic-cve-2017-10271:
+    image: vulhub/weblogic:10.3.6.0-2017
+    container_name: ctf-weblogic
+    ports:
+      - "7001:7001"
+    networks:
+      - vuln-net
+    restart: unless-stopped
+
+  # === SQL INJECTION ===
+  phpmyadmin-cve-2018-12613: 
+    image: vulhub/phpmyadmin:4.8.1
+    container_name: ctf-phpmyadmin
+    ports:
+      - "8088:80"
+    networks:
+      - vuln-net
+    restart: unless-stopped
+
+  joomla-cve-2017-8917:
+    image: vulhub/joomla:3.7.0
+    container_name: ctf-joomla
+    ports:
+      - "8091:80"
+    networks:
+      - vuln-net
+    restart: unless-stopped
+
+  # === XSS Y CMS ===
+  wordpress-pwnscriptum:
+    image: vulhub/wordpress:4.6
+    container_name: ctf-wordpress
+    ports:
+      - "8089:8080"
+    networks:
+      - vuln-net
+    restart: unless-stopped
+
+  # === FILE UPLOAD ===
+  jenkins-cve-2018-1000861:
+    image: vulhub/jenkins:2.138
+    container_name: ctf-jenkins
+    ports:
+      - "8083:8080"
+    networks:
+      - vuln-net
+    restart: unless-stopped
+
+  # === RCE DATABASES ===
+  elasticsearch-cve-2014-3120:
+    image: vulhub/elasticsearch:1.1.1
+    container_name: ctf-elastic
+    ports:
+      - "9200:9200"
+    networks:
+      - vuln-net
+    restart: unless-stopped
+
+  redis-cve-2022-0543:
+    image: vulhub/redis:5.0.7
+    container_name: ctf-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - vuln-net
+    restart: unless-stopped
+
+  mysql-cve-2012-2122:
+    image: vulhub/mysql:5.5.23
+    container_name: ctf-mysql
+    ports:
+      - "3307:3306"
+    networks:
+      - vuln-net
+    restart: unless-stopped
+
+  # === GESTIÓN Y MONITORIZACIÓN ===
+  nexus-cve-2019-7238:
+    image: vulhub/nexus:3.14.0
+    container_name: ctf-nexus
+    ports:
+      - "8090:8080"
+    networks:
+      - vuln-net
+    restart: unless-stopped
+
+  grafana-cve-2021-43798:
+    image: vulhub/grafana:8.2.6
+    container_name: ctf-grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - vuln-net
+    restart: unless-stopped
+
+  openssh-cve-2018-15473:
+    build:
+      context: ./vulhub/openssh/cve-2018-15473
+      dockerfile: Dockerfile
+    container_name: ctf-openssh
+    ports:
+      - "2222:22"
+    networks:
+      - vuln-net
+    restart: unless-stopped
+
+  sorl-cve-2017-12629:
+    image: vulhub/solr:7.0.1
+    container_name: ctf-sorl
+    ports:
+      - "8983:8983"
+    networks:
+      - vuln-net
+    restart: unless-stopped
+
+  # === BACKDOORS Y CONFIGURACIÓN ===
+  fastjson-1.2.24-rce:
+    image: vulhub/fastjson:1.2.24
+    container_name: ctf-fastjson
+    ports:
+      - "8092:8090"
+    networks:
+      - vuln-net
+    restart: unless-stopped
+
+  apache-druid-cve-2021-25646:
+    image: vulhub/apache-druid:0.20.0
+    container_name: ctf-apache
+    ports:
+      - "8888:8888"
+    networks:
+      - vuln-net
+    restart: unless-stopped
+
+networks:
+  vuln-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
