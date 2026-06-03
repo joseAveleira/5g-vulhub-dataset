@@ -109,4 +109,4 @@ Trabajo presentado en las XLVII Jornadas de Automática (CEA), 2026.
 
 ## Licencia
 
-A definir por los autores.
+MIT. Véase el archivo [LICENSE](LICENSE).

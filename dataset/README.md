@@ -50,4 +50,4 @@ Las direcciones/puertos del escenario son parametrizables al inicio de `generar_
 ## Cita
 
 Trabajo presentado en las XLVII Jornadas de Automática (CEA), 2026.
-Licencia de los artefactos: a definir por los autores.
+Licencia de los artefactos: MIT (véase el archivo LICENSE en la raíz del repositorio).
